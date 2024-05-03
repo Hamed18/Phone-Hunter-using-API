@@ -11,6 +11,18 @@ const displayPhones = phones => {
 	// clear phone container cards before adding new cards
 	phoneContainer.textContent='';
 
+    const showAllButton = document.getElementById('show-all-container');
+    if (phones.length > 12){
+		showAllButton.classList.remove('hidden');
+	}   
+	else {
+		showAllButton.classList.add('hidden');
+
+	}
+
+	// display only first 12 phones
+	phones = phones.slice(0,12);
+
 	phones.forEach(phone =>{   // accessing each object one by one
 		// step 2: create a div
 		const phoneCard = document.createElement('div');
