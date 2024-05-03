@@ -9,24 +9,29 @@
 </head>
 <body>
 	<header>
-         <h2 class="text-center font-extrabold text-2xl mt-4 ">Hunting Phone</h2>
+         <h2 class="text-center font-extrabold text-2xl mt-4 text-accent">Latest Smartphones</h2>
 	</header>
 
 	<main class="container mx-auto mt-8">
-        <!-- search result -->
-		<section class="bg-gray-100 p-4 m-4">
-			<input id="search-field" type="text" placeholder="Search here" class="input input-bordered input-accent w-full max-w-xs" />
-			<button onclick="handleSearch()" class="btn btn-accent">Search</button>
 
+        <!--Search Bar - Search Result -->
+		<section class="bg-gray-100 p-2 m-4 flex justify-center rounded-xl">
+			<input id="search-field" type="text" placeholder="Search here" class="input input-bordered input-accent w-full max-w-xs" />
+			<button onclick="handleSearch()" class="btn btn-accent mx-2">Search</button>
 		</section>
 
 		<!-- show search result within this div. appendchild() into this in js file -->
 		<section>  
+			<!-- loading spinnner -->
+			<div class="text-center my-40 hidden" id="loading-spinner">
+				<span class="loading loading-spinner loading-xl text-accent"></span>
+			</div>
+
 			<div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2 lg:gap-4 my-4 bg-gray">            
 			</div>
 
 			<!-- show all buttton -->
-			<div class="hidden" id="show-all-container"> 
+			<div class="hidden flex justify-center" id="show-all-container"> 
 				<button class="btn btn-accent">Show All</button>
 			</div>
 
