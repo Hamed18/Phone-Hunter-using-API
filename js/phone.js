@@ -1,5 +1,5 @@
-const loadPhone = async () => {
-	const res = await fetch('https://openapi.programming-hero.com/api/phones?search=iphone');
+const loadPhone = async (searchText) => {
+	const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);  // synatx error: becktick ` `
 	const data = await res.json();
 	const phones = data.data;   // select object within object 
 	displayPhones(phones);
@@ -8,12 +8,15 @@ const loadPhone = async () => {
 const displayPhones = phones => {
 	// step 1: where should we append the newly created div
 	const phoneContainer = document.getElementById("phone-container");
-	phones.forEach(phone =>{
+	// clear phone container cards before adding new cards
+	phoneContainer.textContent='';
+
+	phones.forEach(phone =>{   // accessing each object one by one
 		// step 2: create a div
 		const phoneCard = document.createElement('div');
 		phoneCard.classList = `card p-4 bg-gray-100 shadow-xl`;
 
-		// step 3: set inner html : card's layout
+		// step 3: set inner html : craete a card's layout
 		phoneCard.innerHTML = `
 		<figure class="px-10 pt-10">
 		<img src="${phone.image}" alt="Shoes" class="rounded-xl" />
@@ -27,7 +30,7 @@ const displayPhones = phones => {
 	    </div>
 	    `;
 
-		// step 4: append child
+		// step 4: append child 
 		phoneContainer.appendChild(phoneCard);
 
 	})
@@ -37,10 +40,10 @@ loadPhone();
 
 // handle search button 
 const handleSearch = () =>{
-	// console.log('search here'); 
+	 console.log('search here'); 
 	const searchField = document.getElementById('search-field');
 	const searchText = searchField.value;
-	console.log(searchText);
-	loadPhone();
+//	console.log(searchText);
+	loadPhone(searchText);
 }
 
