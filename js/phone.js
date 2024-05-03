@@ -1,11 +1,11 @@
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText, showAll) => {
 	const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);  // synatx error: becktick ` `
 	const data = await res.json();
 	const phones = data.data;   // select object within object 
-	displayPhones(phones);
+	displayPhones(phones,showAll);
 }
 
-const displayPhones = phones => {
+const displayPhones = (phones,showAll) => {
 	// step 1: where should we append the newly created div
 	const phoneContainer = document.getElementById("phone-container");
 	// clear phone container cards before adding new cards
@@ -17,12 +17,16 @@ const displayPhones = phones => {
 		showAllButton.classList.remove('hidden');
 	}   
 	else {
-		showAllButton.classList.add
-		('hidden');
+		showAllButton.classList.add('hidden');
 	}
 
 	// display only first 12 phones
-	phones = phones.slice(0,12);
+	if (!showAll){
+	    phones = phones.slice(0,12);
+	}
+	else{
+		showAllButton.classList.add('hidden');
+	}
 
 	phones.forEach(phone =>{   // accessing each object one by one
 		// step 2: create a div
@@ -56,13 +60,13 @@ const displayPhones = phones => {
 loadPhone();
 
 // handle search button 
-const handleSearch = () =>{
+const handleSearch = (showAll) =>{
 	toggleLoadingSpinner(true);
 //	 console.log('search here'); 
 	const searchField = document.getElementById('search-field');
 	const searchText = searchField.value;
 //	console.log(searchText);
-	loadPhone(searchText);
+	loadPhone(searchText, showAll);
 }
 
 // Loading spinner arrow function
@@ -72,4 +76,9 @@ const toggleLoadingSpinner = (isLoading) => {
 	    loadingSpinner.classList.remove('hidden');
 	else
 	    loadingSpinner.classList.add('hidden');
+}
+
+// show all button has a parameter that other search button don't have
+const showAll = () => {
+	handleSearch(true);
 }
