@@ -9,12 +9,18 @@
 </head>
 <body>
 	<header>
-         <h2 onclick="loadPhone()">Hunting Phone</h2>
+         <h2 class="text-center font-extrabold text-2xl mt-4">Hunting Phone</h2>
 	</header>
 
-	<main>
+	<main class="container mx-auto mt-8">
+        <!-- search result -->
+		<section class="bg-gray-100 p-4 m-4">
+			<input id="search-field" type="text" placeholder="Search here" class="input input-bordered input-accent w-full max-w-xs" />
+			<button onclick="handleSearch()" class="btn btn-accent">Search</button>
+		</section>
+
 		<section>
-			<div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2 lg:gap-4 my-4">
+			<div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2 lg:gap-4 my-4 bg-gray">
              
 			</div>
 		</section>

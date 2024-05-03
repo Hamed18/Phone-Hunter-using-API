@@ -11,7 +11,7 @@ const displayPhones = phones => {
 	phones.forEach(phone =>{
 		// step 2: create a div
 		const phoneCard = document.createElement('div');
-		phoneCard.classList = `card w-96 bg-gray-100 shadow-xl`;
+		phoneCard.classList = `card p-4 bg-gray-100 shadow-xl`;
 
 		// step 3: set inner html : card's layout
 		phoneCard.innerHTML = `
@@ -34,3 +34,13 @@ const displayPhones = phones => {
 }
 
 loadPhone();
+
+// handle search button 
+const handleSearch = () =>{
+	// console.log('search here'); 
+	const searchField = document.getElementById('search-field');
+	const searchText = searchField.value;
+	console.log(searchText);
+	loadPhone();
+}
+
