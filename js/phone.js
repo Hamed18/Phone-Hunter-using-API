@@ -5,6 +5,7 @@ const loadPhone = async (searchText, showAll) => {
 	displayPhones(phones,showAll);
 }
 
+
 const displayPhones = (phones,showAll) => {
 	// step 1: where should we append the newly created div
 	const phoneContainer = document.getElementById("phone-container");
@@ -53,13 +54,13 @@ const displayPhones = (phones,showAll) => {
 	})
 
 	// after showing all object then hide loading
-	toggleLoadingSpinner(false);
-	
+	toggleLoadingSpinner(false);	
 }
 
-loadPhone();
+//loadPhone();
 
-// handle search button 
+
+// search button 
 const handleSearch = (showAll) =>{
 	toggleLoadingSpinner(true);
 //	 console.log('search here'); 
@@ -69,7 +70,8 @@ const handleSearch = (showAll) =>{
 	loadPhone(searchText, showAll);
 }
 
-// Loading spinner arrow function
+
+// Loading spinner 
 const toggleLoadingSpinner = (isLoading) => {
 	const loadingSpinner = document.getElementById('loading-spinner');
 	if (isLoading)
@@ -78,16 +80,39 @@ const toggleLoadingSpinner = (isLoading) => {
 	    loadingSpinner.classList.add('hidden');
 }
 
+
 // show all button has a parameter that other search button don't have
 const showAll = () => {
 	handleSearch(true);
 }
 
+
 // show detail button on each card
 const handleShowDetail = async(id) => {
 	// console.log(id);  step 1: learn to access unique id of each card
 	// step 2: data fetch using API and convert to json
-	const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+	const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);  // dynamic id
 	const data = await res.json();
-    console.log(data);
+    console.log(data);  // check the retrieved data in console
+    const phone = data.data;
+
+	// change innerText of modal's html 
+    setTextElementValueById('show-detail-phone-name', phone.name);
+    const showDetailImg = document.getElementById('show-detail-img-container');
+    showDetailImg.innerHTML= `
+	    <img src = "${phone?.image}" alt="" class="flex justify-center rounded-xl"/>
+	`
+	setTextElementValueById('show-detail-phone-storage', phone?.mainFeatures?.storage);
+	setTextElementValueById('show-detail-phone-displaySize', phone?.mainFeatures?.displaySize);
+	setTextElementValueById('show-detail-phone-sensor', phone?.mainFeatures?.sensors);
+
+	// show the modal
+	show_details_modal.showModal();
 }
+
+// utitly funciton
+function setTextElementValueById(elementId, value){
+    const element = document.getElementById(elementId);
+    element.innerText = value;
+}
+
