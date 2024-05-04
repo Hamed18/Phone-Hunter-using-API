@@ -1,5 +1,5 @@
 const loadPhone = async (searchText, showAll) => {
-	const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);  // synatx error: becktick ` `
+	const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);  // synatx error: use becktick ` ` not ' '
 	const data = await res.json();
 	const phones = data.data;   // select object within object 
 	displayPhones(phones,showAll);
@@ -42,7 +42,7 @@ const displayPhones = (phones,showAll) => {
 		    <h2 class="card-title">${phone.phone_name}</h2>
 		    <p>If a dog chews shoes whose shoes does he choose?</p>
 		    <div class="card-actions">
-		       <button class="btn btn-primary">Buy Now</button>
+		       <button onclick="handleShowDetail('${phone.slug}')" class="btn btn-primary">Show Details</button>
 		    </div>
 	    </div>
 	    `;
@@ -81,4 +81,13 @@ const toggleLoadingSpinner = (isLoading) => {
 // show all button has a parameter that other search button don't have
 const showAll = () => {
 	handleSearch(true);
+}
+
+// show detail button on each card
+const handleShowDetail = async(id) => {
+	// console.log(id);  step 1: learn to access unique id of each card
+	// step 2: data fetch using API and convert to json
+	const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+	const data = await res.json();
+    console.log(data);
 }
